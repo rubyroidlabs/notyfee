@@ -21,6 +21,7 @@ group :development do
   gem 'awesome_print'
 end
 
+gem 'draper'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
