@@ -16,6 +16,10 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'unicorn'
+group :development do
+  gem 'pry-rails'
+  gem 'awesome_print'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
