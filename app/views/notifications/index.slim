@@ -1,0 +1,86 @@
+table.notification_list
+  tr
+    th
+      select
+        option 2014
+        option 2015
+    th
+      div Январь
+    th
+      div Февраль
+    th
+      div Март
+    th
+      div Апрель
+    th
+      div Май
+    th
+      div Июнь
+    th
+      div Июль
+    th
+      div Август
+    th
+      div Сентябрь
+    th
+      div Октябрь
+    th
+      div Ноябрь
+    th
+      div Декабрь
+  tr.good
+    td
+      span Tesla motors
+    td
+      span 1
+    td
+      span.paid 1
+    td
+      span.max 1
+    td
+      span.max.paid 0
+    td
+      span.future.paid 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+  tr
+    td
+      span Canonical
+    td
+      span 1
+    td
+      span.paid 1
+    td
+      span.max 1
+    td
+      span.max.paid 0
+    td
+      span.future.paid 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+    td
+      span.future 0
+javascript:
+  $('.notification_list td:not(:first-child) span').click(function(){$(this).toggleClass('paid')});

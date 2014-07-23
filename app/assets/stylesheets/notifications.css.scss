@@ -1,3 +1,97 @@
 // Place all the styles related to the notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.notification_list {
+  margin: 0 auto;
+}
+.notification_list th:first-child {background-color: white}
+.notification_list th {
+  background-color: #eee;
+  text-align: center;
+  vertical-align: bottom;
+  height: 150px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.notification_list th div {
+  transform: rotate(-90deg);
+  text-align: center;
+  vertical-align: middle;
+  width: 20px;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top:10px;
+  white-space: nowrap;
+}
+.notification_list td:first-child span {background: white; padding: 10px}
+.notification_list td:not(:first-child) span {
+  padding: 5px;
+  margin: 5px;
+  background-color: #007;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 0px black;
+}
+.notification_list td:not(:first-child) span:hover {
+  box-shadow: 0 0 3px 1px black;
+}
+
+.notification_list td:not(:first-child) span     { background: #ff0 }
+.notification_list td:not(:first-child) span.max { background: #f00; color: #fff }
+.notification_list .good td:not(:first-child) span { background: #fb7; color: inherit }
+.notification_list td:not(:first-child) span.future { background: #eef }
+.notification_list td:not(:first-child) span.paid   { background: #0f0; color: inherit }
+
+.notification_form input.title {
+  display: block;
+  margin: 0 auto;
+  border: 0px;
+  border-bottom: 1px black solid;
+  text-align: center;
+}
+.notification_form table.mail {
+  margin: 20px auto;
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notification_form .mail td {border: 20px transparent solid}
+.notification_form .mail tr:first-child td {border-top:none}
+.notification_form .mail tr:last-child  td {border-bottom:none}
+.notification_form .mail td:first-child {border-left:none}
+.notification_form .mail td:last-child  {border-right:none}
+
+.notification_form .mail td:last-child {width: 70%;}
+.notification_form .mail td:first-child {
+  width: 30%;
+  text-align: right;
+  vertical-align: top;
+}
+.notification_form .mail td:first-child div {padding-top: 1px}
+
+.notification_form .mail input, .mail textarea {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-top: 1px #bbb solid;
+  border-bottom: 1px #bbb solid;
+  background-color: #f5f5f5;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit
+}
+.notification_form .dates_and_times {}
+.notification_form .mail textarea {height: 100px;}
+.notification_form .send_dates {
+  display: inline-block;
+  vertical-align: top;
+}

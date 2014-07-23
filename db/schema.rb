@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(version: 20140721134547) do
 
   create_table "notification_instances", force: true do |t|
     t.integer  "notification_sample_id"
-    t.integer  "month"
-    t.integer  "year"
+    t.integer  "month_offset"
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"

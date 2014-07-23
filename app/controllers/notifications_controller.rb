@@ -2,6 +2,11 @@ class NotificationsController < ApplicationController
   before_filter :set_year, only: [:index]
 
   def index
+    @notifications = Notification
+      .includes(:notification_instances)
+      .includes(:payments)
+      .all
+      .decorate
   end
 
   def new
