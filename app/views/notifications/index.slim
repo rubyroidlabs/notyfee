@@ -35,3 +35,6 @@ table.notification_list
         td
           = link_to toggle_paid_notification_path(n, offset: cell[:offset]), method: :put do
             span[class=cell[:css_classes]] = cell[:count]
+  tr
+    td
+      = link_to '+', new_notification_path, class: 'new_link'
