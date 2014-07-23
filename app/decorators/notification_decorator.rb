@@ -39,7 +39,7 @@ class NotificationDecorator < Draper::Decorator
     [].tap do |classes|
       classes << 'paid' if payments.where(month_offset: offset).any?
       classes << 'max'  if (instance_count == ns_count)
-      classes << 'empty' if offset <= 0
+      classes << 'empty' if offset < 0
       classes << 'future' unless DateTime.parse("#{year}-#{month+1}-01") < Time.current
     end.join " "
   end
