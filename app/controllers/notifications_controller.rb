@@ -15,7 +15,17 @@ class NotificationsController < ApplicationController
   def create
   end
 
-  def set_paid
+  def toggle_paid
+    @notification = Notification.find(params[:id])
+    payment = @notification.payments
+      .where(month_offset: params[:offset])
+      .first_or_initialize
+    if payment.persisted?
+      payment.destroy
+    else
+      payment.save!
+    end
+    redirect_to action: :index
   end
 
   def set_year

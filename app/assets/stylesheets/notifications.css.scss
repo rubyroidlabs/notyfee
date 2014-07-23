@@ -30,6 +30,7 @@
         background: white;
         padding: 10px;
     }
+    a { color: inherit }
     .good td:not(:first-child) span { background: #fb7; color: inherit }
     td:not(:first-child) span {
         padding: 5px;
@@ -45,8 +46,9 @@
             box-shadow: 0 0 3px 1px black;
         }
         &.max    { background: #f00; color: #fff }
-        &.future { background: #eef }
-        &.paid   { background: #0f0; color: inherit; }
+        &.empty  { background: #fff; color: #000 }
+        &.future { background: #eef; color: #000 }
+        &.paid   { background: #0f0; color: #000 }
 
     }
 }

@@ -10,8 +10,8 @@ class NotificationDecorator < Draper::Decorator
   #     end
   #   end
 
-  def good?
-    notification_sample.count == 1
+  def css_class
+    (notification_samples.count == 1) ? 'good' : ''
   end
 
   def offsets_for_year(year)
@@ -24,15 +24,23 @@ class NotificationDecorator < Draper::Decorator
   def row_data(year)
     offsets = offsets_for_year(year)
     ns_count = notification_samples.count
-    (0...12).map do |x|
-      offset = offsets[x]
+    (0...12).map do |month|
+      offset = offsets[month]
       instance_count = notification_instances.where(month_offset: offset).count
       {
         offset: offset,
-        paid: payments.where(month_offset: offset).any?,
-        count: instance_count,
-        max: (instance_count == ns_count),
+        css_classes: css_row_classes(year, month, offset, instance_count, ns_count),
+        count: instance_count
       }
     end
+  end
+
+  def css_row_classes(year, month, offset, instance_count, ns_count)
+    [].tap do |classes|
+      classes << 'paid' if payments.where(month_offset: offset).any?
+      classes << 'max'  if (instance_count == ns_count)
+      classes << 'empty' if offset <= 0
+      classes << 'future' unless DateTime.parse("#{year}-#{month+1}-01") < Time.current
+    end.join " "
   end
 end
