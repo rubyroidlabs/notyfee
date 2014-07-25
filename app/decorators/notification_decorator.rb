@@ -10,6 +10,11 @@ class NotificationDecorator < Draper::Decorator
   #     end
   #   end
 
+  def notification_samples_for_form
+    collection = notification_samples.where(notification_id: id)
+    collection.any? ? collection : notification_samples.build
+  end
+
   def css_class
     (notification_samples.count == 1) ? 'good' : ''
   end

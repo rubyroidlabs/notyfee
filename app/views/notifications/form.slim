@@ -1,0 +1,37 @@
+= form_for @notification, html:{class: 'notification_form'} do |f|
+  = f.text_field :name, placeholder: "Название нотификации", class: 'title'
+  - flash.each do |flash_type, flash_content|
+    .flash class=flash_type
+      = flash_content
+  table.mail
+    tr
+      td
+        div Заголовок:
+      td
+        = f.text_field :title
+    tr
+      td
+        div Получатели:
+      td
+        = f.text_field :to
+    tr
+      td
+        div Текст:
+      td
+        = f.text_area :text
+  p.dates_and_times
+    | Нотификации об оплате за
+    = f.month_field :year_month, value: @notification.year_month, min: "2014-07"
+    | будут отправлены в следующие дни:
+    span.send_dates
+      = f.fields_for :notification_samples, @notification_samples_for_form do |ff|
+        = ff.hidden_field :notification_id
+        = ff.date_field :date, value: ff.object.date
+        = ff.time_field :time, value: ff.object.time
+        br
+      button.add_date +
+  p
+    | Время указано для часового пояса
+    = f.time_zone_select :timezone
+    | .
+  = f.submit 'Сохранить'

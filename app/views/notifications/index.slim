@@ -30,7 +30,8 @@ table.notification_list
   - @notifications.each do |n|
     tr[class=n.css_class]
       td
-        span = n.name
+        = link_to edit_notification_path(n) do
+          span = n.name
       - n.row_data(@year).each do |cell|
         td
           = link_to toggle_paid_notification_path(n, offset: cell[:offset]), method: :put do

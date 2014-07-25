@@ -2,6 +2,20 @@ class NotificationSample < ActiveRecord::Base
   belongs_to :notification
   has_many :notification_instances
   has_many :payments, through: :notification
+  after_initialize :init
+
+  def init
+    datetime ||= notification.try(:first_day)
+    datetime ||= DateTime.parse('2014-07-01')
+  end
+
+  def date
+    datetime.strftime('%Y-%m-%d')
+  end
+
+  def time
+    datetime.strftime('%H:%M')
+  end
 
   def unpaid_instances_until(date)
     unpaid_offsets_until(date).map do |offset|
