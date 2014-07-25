@@ -10,7 +10,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 gem 'spring',        group: :development
-gem 'turbolinks'
 gem 'non-stupid-digest-assets'
 gem 'webshims-rails'
 
