@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 gem 'rails', '4.1.2'
 gem 'pg'
@@ -12,6 +11,8 @@ gem 'jquery-rails'
 gem 'spring',        group: :development
 gem 'non-stupid-digest-assets'
 gem 'webshims-rails'
+gem 'sidekiq'
+gem 'sidetiq'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
