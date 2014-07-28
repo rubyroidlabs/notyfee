@@ -24,7 +24,7 @@
     = f.month_field :year_month, value: @notification.year_month, min: "2014-07"
     | будут отправлены в следующие дни:
     span.send_dates
-      = f.fields_for :notification_samples, @notification_samples_for_form do |ff|
+      = f.fields_for :notification_samples do |ff|
         = ff.hidden_field :notification_id
         = ff.date_field :date, value: ff.object.date
         = ff.time_field :time, value: ff.object.time
@@ -35,3 +35,5 @@
     = f.time_zone_select :timezone
     | .
   = f.submit 'Сохранить'
+javascript:
+  $('.add-date').click(function(){alert('foo'); return false});

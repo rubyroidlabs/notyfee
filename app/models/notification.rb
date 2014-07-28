@@ -4,7 +4,7 @@ class Notification < ActiveRecord::Base
   has_many :notification_instances, through: :notification_samples
   after_initialize :init
   accepts_nested_attributes_for :notification_samples
-  %i(name title to text start_month start_year notification_samples timezone).each do |x|
+  %i(name title to text start_month start_year timezone).each do |x|
     validates x, presence: true
   end
 
@@ -13,6 +13,9 @@ class Notification < ActiveRecord::Base
     self.start_year  ||= time.year
     self.start_month ||= time.month
     self.timezone    ||= 'UTC'
+    if self.notification_samples.count == 0
+      self.notification_samples << NotificationSample.new
+    end
   end
 
   def check_and_send

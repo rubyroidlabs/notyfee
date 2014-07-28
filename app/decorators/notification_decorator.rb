@@ -40,6 +40,14 @@ class NotificationDecorator < Draper::Decorator
     end
   end
 
+  def errors_flash_content
+    h.content_tag :ul, class: 'error_list' do
+      errors.full_messages.each do |msg|
+        h.concat(h.content_tag(:li, msg))
+      end
+    end
+  end
+
   def css_row_classes(year, month, offset, instance_count, ns_count)
     [].tap do |classes|
       classes << 'paid' if payments.where(month_offset: offset).any?
