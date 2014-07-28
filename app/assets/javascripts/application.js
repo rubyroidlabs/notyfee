@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require webshims/extras/modernizr-custom
 //= require webshims/polyfiller
 //= require enable_webshims
 //= require_tree .
