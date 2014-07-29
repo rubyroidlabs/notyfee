@@ -52,8 +52,8 @@ class NotificationSample < ActiveRecord::Base
       month_offset = 0
       loop do
         date = self.datetime + month_offset.months
-        month_offset += 1
         yielder << [month_offset, date]
+        month_offset += 1
       end
     end
   end
