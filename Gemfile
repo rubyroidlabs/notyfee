@@ -25,6 +25,7 @@ group :development do
   gem 'awesome_print'
 end
 
+gem 'devise'
 gem 'draper'
 gem 'virtus'
 
