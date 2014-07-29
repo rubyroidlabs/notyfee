@@ -1,5 +1,7 @@
 class Notification < ActiveRecord::Base
-  has_many :notification_samples, inverse_of: :notification, dependent: :destroy
+  has_many :notification_samples, inverse_of: :notification,
+                                   dependent: :destroy,
+                                       order: 'datetime DESC'
   has_many :payments
   has_many :notification_instances, through: :notification_samples
   after_initialize :init
