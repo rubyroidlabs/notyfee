@@ -1,5 +1,5 @@
 class NotificationSample < ActiveRecord::Base
-  belongs_to :notification
+  belongs_to :notification, inverse_of: :notification_samples
   has_many :notification_instances, dependent: :destroy
   has_many :payments, through: :notification
   after_initialize :init
