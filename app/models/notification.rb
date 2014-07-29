@@ -13,9 +13,6 @@ class Notification < ActiveRecord::Base
     self.start_year  ||= time.year
     self.start_month ||= time.month
     self.timezone    ||= 'UTC'
-    if self.notification_samples.count == 0
-      self.notification_samples.build(datetime: notification_sample_default_datetime)
-    end
   end
 
   def check_and_send
@@ -31,10 +28,10 @@ class Notification < ActiveRecord::Base
   end
 
   def notification_sample_default_datetime
-    ActiveSupport::TimeZone.new('Minsk').parse("#{first_day_str} 15:00")
+    ActiveSupport::TimeZone.new(timezone).parse("#{first_day_str} 15:02")
   end
 
   def first_day_str
-    "#{start_year}-#{start_month}-01"
+    "#{start_year}-#{start_month}-28"
   end
 end
