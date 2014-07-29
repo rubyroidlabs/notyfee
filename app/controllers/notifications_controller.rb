@@ -21,9 +21,8 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    params.require(:notification).permit!
     @notification = Notification.find(params[:id]).decorate
-    if @notification.update_attributes(params[:notification])
+    if @notification.update_attributes(notification_params)
       redirect_to action: :index
     else
       flash[:error] = @notification.errors_flash_content
@@ -32,8 +31,7 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    params.require(:notification).permit!
-    @notification = Notification.new(params[:notification]).decorate
+    @notification = Notification.new(notification_params).decorate
     if @notification.save
       redirect_to action: :index
     else
@@ -60,10 +58,20 @@ class NotificationsController < ApplicationController
     redirect_to action: :index
   end
 
+private
+
   def set_year
     if y = params[:year]
       session[:year] = y
     end
     @year = session[:year] || Time.current.year
+  end
+
+  def notification_params
+    params.require(:notification).permit(
+      :notification, :name, :title, :to, :text, :year_month, :timezone,
+      notification_samples_attributes: [
+        :id, :notification_id, :datetime_local
+      ])
   end
 end
