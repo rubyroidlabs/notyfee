@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  has_many :notification_samples
+  has_many :notification_samples, inverse_of: :notification, dependent: :destroy
   has_many :payments
   has_many :notification_instances, through: :notification_samples
   after_initialize :init
@@ -14,7 +14,10 @@ class Notification < ActiveRecord::Base
     self.start_month ||= time.month
     self.timezone    ||= 'UTC'
     if self.notification_samples.count == 0
-      self.notification_samples << NotificationSample.new
+      self.notification_samples << NotificationSample.new(
+        notification: self,
+        datetime:     notification_sample_default_datetime
+      )
     end
   end
 
@@ -30,8 +33,9 @@ class Notification < ActiveRecord::Base
     self.start_year, self.start_month = data.split('-')
   end
 
-  def first_day
-    DateTime.parse first_day_str
+  def notification_sample_default_datetime
+    format = '%Y-%m-%d %H:%M %Z'
+    DateTime.strptime("#{first_day_str} 15:00 #{timezone}", format)
   end
 
   def first_day_str

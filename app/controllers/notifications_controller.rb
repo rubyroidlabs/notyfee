@@ -42,6 +42,11 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def destroy
+    @notification = Notification.find(params[:id]).destroy
+    redirect_to action: :index
+  end
+
   def toggle_paid
     @notification = Notification.find(params[:id])
     payment = @notification.payments

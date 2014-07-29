@@ -26,14 +26,19 @@
     span.send_dates
       = f.fields_for :notification_samples do |ff|
         = ff.hidden_field :notification_id
-        = ff.date_field :date, value: ff.object.date
-        = ff.time_field :time, value: ff.object.time
+        = ff.datetime_local_field :datetime_local, value: ff.object.datetime_local
         br
       button.add_date +
   p
     | Время указано для часового пояса
     = f.time_zone_select :timezone
     | .
-  = f.submit 'Сохранить'
+  .bottom_buttons
+    = link_to 'К списку', notifications_path, method: :get
+    = f.submit 'Сохранить'
+    - if @notification.persisted?
+      = link_to 'Удалить', notification_path(@notification),
+          method: :delete,
+          data: {confirm: "Действительно удалить #{@notification.name}?"}
 javascript:
   $('.add-date').click(function(){alert('foo'); return false});

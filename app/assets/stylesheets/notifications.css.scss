@@ -125,10 +125,15 @@
             color: inherit
         }
     }
-    .dates_and_times {}
     .mail textarea {height: 100px;}
     .send_dates {
         display: inline-block;
         vertical-align: top;
+    }
+    .bottom_buttons {
+        a, input[type="submit"] {
+            padding: 5px;
+            margin: 5px;
+        }
     }
 }

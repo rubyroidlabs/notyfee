@@ -1,32 +1,24 @@
 class NotificationSample < ActiveRecord::Base
   belongs_to :notification
-  has_many :notification_instances
+  has_many :notification_instances, dependent: :destroy
   has_many :payments, through: :notification
   after_initialize :init
+  before_save :set_datetime
+  DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
 
   def init
-    self.datetime ||= notification.try(:first_day)
-    self.datetime ||= DateTime.parse('2014-07-01')
+    self.datetime ||= notification.try(:notification_sample_default_datetime)
+    # self.datetime ||= DateTime.current
+    #   .change(year: 2014, month: 7, day: 1, hour: 15, min: 0, sec: 0)
   end
 
-  def date
-    datetime.strftime('%Y-%m-%d')
+  def datetime_local
+    @datetime_str || datetime.strftime(DATETIME_FORMAT)
   end
 
-  def time
-    datetime.strftime('%H:%M')
-  end
-
-  # format is '2014-05-30'
-  def date=(datestr)
-    y,m,d = datestr.split('-').map(&:to_i)
-    self.datetime = datetime.change(year: y, month: m, day: d)
-  end
-
-  # format is '13:42'
-  def time=(timestr)
-    hh,mm = timestr.split(':').map(&:to_i)
-    self.datetime = datetime.change(hour: hh, min: mm, sec: 0)
+  # format is '2014-05-30T15:00'
+  def datetime_local=(datetime_str)
+    @datetime_str = datetime_str
   end
 
   def unpaid_unsent_instances_until(date)
@@ -62,6 +54,18 @@ class NotificationSample < ActiveRecord::Base
         month_offset += 1
         yielder << [month_offset, date]
       end
+    end
+  end
+
+  def set_datetime
+    if @datetime_str
+      str = "#{@datetime_str} #{notification.timezone}"
+      puts "\n"*5
+      p str
+      puts "\n"*5
+      self.datetime = DateTime.strptime(
+        str,
+        "#{DATETIME_FORMAT} %Z")
     end
   end
 end
