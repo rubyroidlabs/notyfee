@@ -65,7 +65,7 @@ private
     if y = params[:year]
       session[:year] = y
     end
-    @year = session[:year] || Time.current.year
+    @year = (session[:year] || Time.current.year).to_i
   end
 
   def notification_params

@@ -1,8 +1,9 @@
 table.notification_list
   tr
     th
-      select
-        option = @year
+      ul
+        - (2014...2016).each do |year|
+          li = link_to year, notifications_path(year: year)
     th
       div Январь
     th
