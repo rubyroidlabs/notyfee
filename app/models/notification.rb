@@ -14,10 +14,7 @@ class Notification < ActiveRecord::Base
     self.start_month ||= time.month
     self.timezone    ||= 'UTC'
     if self.notification_samples.count == 0
-      self.notification_samples << NotificationSample.new(
-        notification: self,
-        datetime:     notification_sample_default_datetime
-      )
+      self.notification_samples.build(datetime: notification_sample_default_datetime)
     end
   end
 

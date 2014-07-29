@@ -3,7 +3,6 @@ class NotificationSample < ActiveRecord::Base
   has_many :notification_instances, dependent: :destroy
   has_many :payments, through: :notification
   after_initialize :init
-  before_save :set_datetime
   DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
 
   def init
@@ -13,12 +12,12 @@ class NotificationSample < ActiveRecord::Base
   end
 
   def datetime_local
-    @datetime_str || datetime.in_time_zone(notification.timezone).strftime(DATETIME_FORMAT)
+    datetime.in_time_zone(notification.timezone).strftime(DATETIME_FORMAT)
   end
 
   # format is '2014-05-30T15:00'
   def datetime_local=(datetime_str)
-    @datetime_str = datetime_str
+    self.datetime = ActiveSupport::TimeZone.new(notification.timezone).parse(datetime_str)
   end
 
   def unpaid_unsent_instances_until(date)
@@ -54,12 +53,6 @@ class NotificationSample < ActiveRecord::Base
         month_offset += 1
         yielder << [month_offset, date]
       end
-    end
-  end
-
-  def set_datetime
-    if @datetime_str
-      self.datetime = ActiveSupport::TimeZone.new(notification.timezone).parse(@datetime_str)
     end
   end
 end
