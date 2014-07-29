@@ -13,7 +13,7 @@ class NotificationSample < ActiveRecord::Base
   end
 
   def datetime_local
-    @datetime_str || datetime.strftime(DATETIME_FORMAT)
+    @datetime_str || datetime.in_time_zone(notification.timezone).strftime(DATETIME_FORMAT)
   end
 
   # format is '2014-05-30T15:00'
@@ -59,13 +59,7 @@ class NotificationSample < ActiveRecord::Base
 
   def set_datetime
     if @datetime_str
-      str = "#{@datetime_str} #{notification.timezone}"
-      puts "\n"*5
-      p str
-      puts "\n"*5
-      self.datetime = DateTime.strptime(
-        str,
-        "#{DATETIME_FORMAT} %Z")
+      self.datetime = ActiveSupport::TimeZone.new(notification.timezone).parse(@datetime_str)
     end
   end
 end

@@ -34,8 +34,7 @@ class Notification < ActiveRecord::Base
   end
 
   def notification_sample_default_datetime
-    format = '%Y-%m-%d %H:%M %Z'
-    DateTime.strptime("#{first_day_str} 15:00 #{timezone}", format)
+    ActiveSupport::TimeZone.new('Minsk').parse("#{first_day_str} 15:00")
   end
 
   def first_day_str
