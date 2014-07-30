@@ -20,8 +20,13 @@ body {font-family: Helvetica; color: black;}
 .container {
   resize: both;
   overflow: auto;
-  width: 700px;
+  width: 800px;
   margin: 20px auto;
-  padding: 40px;
+  padding: 30px 60px;
   box-shadow: 0 0 5px 5px gray;
+  box-sizing: border-box;
+}
+.session_management {
+    text-align: right;
+    margin-bottom: 10px;
 }
