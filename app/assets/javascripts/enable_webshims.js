@@ -1,4 +1,5 @@
 webshim.setOptions("forms-ext", {
+  "replaceUI": true,
   "month": {
     "yearSelect": true,
     "monthSelect": true,
