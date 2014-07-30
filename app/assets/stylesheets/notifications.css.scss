@@ -70,48 +70,47 @@
     }
 }
 
-.notification_form input.title {
-  display: block;
-  margin: 0 auto;
-  border: 0px;
-  border-bottom: 1px black solid;
-  text-align: center;
-}
-.notification_form table.mail {
-  margin: 20px auto;
-  margin-top: 20px;
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .notification_form {
     margin: 0 auto;
     width: 600px;
-    .flash {
-      padding: 5px;
-      margin: 5px 0;
-      border-radius: 10px;
-      text-align: center;
-      background: #77f;
-      &.error  { background: #f77 }
-      &.notice { background: #7f7 }
+    input.title {
+        display: block;
+        margin: 0 auto;
+        border: 0px;
+        border-bottom: 1px black solid;
+        text-align: center;
     }
-
+    .flash {
+        padding: 5px;
+        margin: 5px 0;
+        border-radius: 10px;
+        text-align: center;
+        background: #77f;
+        &.error  { background: #f77 }
+        &.notice { background: #7f7 }
+    }
     .mail {
-        td {border: 20px transparent solid}
+        margin: 20px auto;
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
         tr:first-child td {border-top:none}
         tr:last-child  td {border-bottom:none}
-        td:first-child {border-left:none}
-        td:last-child  {border-right:none}
 
-        td:last-child {width: 70%;}
-        td:first-child {
-            width: 30%;
-            text-align: right;
-            vertical-align: top;
+        td {
+            border: 20px transparent solid;
+            &:first-child {
+                border-left:none;
+                width: 30%;
+                text-align: right;
+                vertical-align: top;
+                div { padding-top: 1px }
+            }
+            &:last-child {
+                border-right:none;
+                width: 70%;
+            }
         }
-        td:first-child div {padding-top: 1px}
-
         input, textarea {
             display: block;
             width: 100%;
@@ -124,8 +123,8 @@
             font-family: inherit;
             color: inherit
         }
+        textarea {height: 100px;}
     }
-    .mail textarea {height: 100px;}
     .send_dates {
         display: inline-block;
         vertical-align: top;
