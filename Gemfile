@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'spring',        group: :development
 gem 'non-stupid-digest-assets'
 gem 'webshims-rails'
+gem 'normalize-rails'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'rails_12factor', group: :production
