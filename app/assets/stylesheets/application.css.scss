@@ -30,3 +30,12 @@ body {font-family: Helvetica; color: black;}
     text-align: right;
     margin-bottom: 10px;
 }
+.flash {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 10px;
+    text-align: center;
+    background: #77f;
+    &.error  { background: #f77 }
+    &.notice { background: #7f7 }
+}
