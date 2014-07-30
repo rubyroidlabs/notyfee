@@ -73,7 +73,7 @@ private
     params.require(:notification).permit(
       :notification, :name, :title, :to, :text, :year_month, :timezone,
       notification_samples_attributes: [
-        :id, :notification_id, :datetime_local
+        :id, :notification_id, :datetime_local, :_destroy
       ])
   end
 end

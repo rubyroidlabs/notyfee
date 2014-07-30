@@ -3,7 +3,7 @@ class Notification < ActiveRecord::Base
   has_many :payments
   has_many :notification_instances, through: :notification_samples
   after_initialize :init
-  accepts_nested_attributes_for :notification_samples
+  accepts_nested_attributes_for :notification_samples, allow_destroy: true
   %i(name title to text start_month start_year timezone).each do |x|
     validates x, presence: true
   end
@@ -28,7 +28,7 @@ class Notification < ActiveRecord::Base
   end
 
   def notification_sample_default_datetime
-    ActiveSupport::TimeZone.new(timezone).parse("#{first_day_str} 15:02")
+    ActiveSupport::TimeZone.new(timezone).parse("#{first_day_str} 15:00")
   end
 
   def first_day_str

@@ -19,15 +19,25 @@
         div Текст:
       td
         = f.text_area :text
-  p.dates_and_times
+  span.dates_and_times
     | Нотификации об оплате за
     = f.month_field :year_month, value: @notification.year_month, min: "2014-07"
     | будут отправлены в следующие дни:
     span.send_dates
-      = f.fields_for :notification_samples do |ff|
-        = ff.hidden_field :notification_id
-        = ff.datetime_local_field :datetime_local, value: ff.object.datetime_local
-        br
+      ul
+        script.notification_sample_template type="text/template"
+          = f.fields_for :notification_samples, NotificationSample.new(notification: @notification) do |ff|
+            li
+              = ff.hidden_field :notification_id
+              = ff.datetime_local_field :datetime_local, value: ff.object.datetime_local
+              = ff.check_box :_destroy
+              = ff.label :_destroy, "Удалить"
+        = f.fields_for :notification_samples, @notification.notification_samples.order(:datetime) do |ff|
+          li
+            = ff.hidden_field :notification_id
+            = ff.datetime_local_field :datetime_local, value: ff.object.datetime_local
+            = ff.check_box :_destroy
+            = ff.label :_destroy, "Удалить"
       button.add_date +
   p
     | Время указано для часового пояса
@@ -41,4 +51,15 @@
           method: :delete,
           data: {confirm: "Действительно удалить #{@notification.name}?"}
 javascript:
-  $('.add-date').click(function(){alert('foo'); return false});
+  var last_index = + $('.send_dates li:last input[type="datetime-local"]')[0].name.
+    replace(/^\D+/, '').
+    replace(/\D+$/,'')
+  var new_index = last_index + 1;
+  add = function(){
+    tpl = $('.notification_sample_template').html().
+      replace(/\[0\]/g, '[' + new_index + ']').
+      replace(/_0_/g,   '_' + new_index + '_');
+    $(tpl).appendTo('.send_dates ul').updatePolyfill();
+    return false;
+  }
+  $('.add_date').click(add);

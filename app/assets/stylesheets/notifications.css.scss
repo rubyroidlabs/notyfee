@@ -129,6 +129,7 @@
     .send_dates {
         display: inline-block;
         vertical-align: top;
+        li { list-style: none }
     }
     .bottom_buttons {
         a, input[type="submit"] {
