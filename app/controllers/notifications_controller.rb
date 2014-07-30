@@ -18,7 +18,6 @@ class NotificationsController < ApplicationController
 
   def new
     @notification = Notification.new.decorate
-    @notification.notification_samples.build
     render :form
   end
 

@@ -51,10 +51,14 @@
           method: :delete,
           data: {confirm: "Действительно удалить #{@notification.name}?"}
 javascript:
-  var last_index = + $('.send_dates li:last input[type="datetime-local"]')[0].name.
-    replace(/^\D+/, '').
-    replace(/\D+$/,'')
-  var new_index = last_index + 1;
+  var new_index = 0;
+  var last_index_item = + $('.send_dates li:last input[type="datetime-local"]')[0]
+  if(last_index_item){
+    var last_index = last_index_item.name.
+      replace(/^\D+/, '').
+      replace(/\D+$/,'')
+    new_index = last_index + 1;
+  }
   add = function(){
     tpl = $('.notification_sample_template').html().
       replace(/\[0\]/g, '[' + new_index + ']').
